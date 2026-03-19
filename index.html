@@ -43,10 +43,15 @@
           object-fit: contain;
         }
 
-        /* 3. Permite que o texto de botões muito grandes quebre a linha em vez de vazar pro lado */
+        /* 3. Ajuste fino para os botões: permite que o fundo cresça junto com o texto */
         button, a {
           white-space: normal !important;
           max-width: 100% !important;
+          height: auto !important; /* Deixa o botão crescer para baixo */
+          min-height: 48px !important; /* Tamanho mínimo bom para clicar com o dedo */
+          padding-top: 12px !important; /* Dá um respiro em cima */
+          padding-bottom: 12px !important; /* Dá um respiro embaixo */
+          line-height: 1.2 !important; /* Deixa as linhas do texto mais baixinhas */
         }
       }
     </style>
