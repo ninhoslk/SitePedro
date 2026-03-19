@@ -19,9 +19,61 @@
     <meta name="twitter:image" content="https://cdn.orbitpages.online/wp-content/uploads/sites/509159/2024/09/og-pages.jpg" />
     <script type="module" crossorigin src="/SitePedro/assets/index-DvB_wa2k.js"></script>
     <link rel="stylesheet" crossorigin href="/SitePedro/assets/index-CkFKUbkj.css">
+
+    <style>
+      /* =======================================================
+         CORREÇÕES EXCLUSIVAS PARA CELULAR (Telas menores que 768px)
+         A versão de PC (Desktop) não será afetada!
+         ======================================================= */
+      @media (max-width: 768px) {
+        /* 1. Remove as bordas pretas (Evita o vazamento horizontal) */
+        html, body {
+          overflow-x: hidden !important;
+          width: 100vw !important;
+          max-width: 100% !important;
+          margin: 0 !important;
+          padding: 0 !important;
+        }
+
+        /* 2. Força que todos os elementos respeitem o tamanho da tela */
+        * {
+          box-sizing: border-box !important;
+          max-width: 100vw !important;
+        }
+
+        /* 3. Centraliza a Logo, Títulos e Descrições no topo */
+        h1, h2, h3, p {
+          text-align: center !important;
+          margin-left: auto !important;
+          margin-right: auto !important;
+          justify-content: center !important;
+        }
+        
+        /* Centraliza imagens (como a sua logo) */
+        img {
+          margin-left: auto !important;
+          margin-right: auto !important;
+          display: block !important;
+        }
+
+        /* 4. Mantém o botão "Quero alcançar meu objetivo" dentro do quadrado */
+        button, a {
+          white-space: normal !important; /* Permite que o texto do botão quebre linha se for longo */
+          height: auto !important; /* Remove altura fixa que faz o texto vazar do botão */
+          min-height: 48px !important;
+          line-height: 1.4 !important;
+          text-align: center !important;
+          max-width: 90% !important; /* Garante que o botão caiba na tela */
+          margin-left: auto !important;
+          margin-right: auto !important;
+          padding-top: 12px !important;
+          padding-bottom: 12px !important;
+        }
+      }
+    </style>
   </head>
 
   <body>
-    <div id="root"></div>
+    <div id="root"></div>
   </body>
 </html>
