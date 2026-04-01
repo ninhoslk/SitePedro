@@ -2,336 +2,450 @@
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>Pedro Aria | Personal Trainer Online - Treino Personalizado</title>
     <meta name="description" content="Personal Trainer Online Pedro Aria - Treino personalizado em qualquer lugar do mundo. Resultados comprovados com mais de 300 alunos." />
     <meta name="author" content="Pedro Aria" />
-    <meta name="theme-color" content="#FF880E" />
+    <meta name="theme-color" content="#FF8C00" />
     <link rel="icon" href="/SitePedro/favicon.png" type="image/png" />
-
     <meta property="og:title" content="Pedro Aria | Personal Trainer Online" />
-    <meta property="og:description" content="Treino personalizado em qualquer lugar do mundo. Personal acessível a qualquer hora e lugar." />
+    <meta property="og:description" content="Treino personalizado em qualquer lugar do mundo." />
     <meta property="og:type" content="website" />
     <meta property="og:image" content="https://cdn.orbitpages.online/wp-content/uploads/sites/509159/2024/09/og-pages.jpg" />
-
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Pedro Aria | Personal Trainer Online" />
     <meta name="twitter:image" content="https://cdn.orbitpages.online/wp-content/uploads/sites/509159/2024/09/og-pages.jpg" />
+
     <script type="module" crossorigin src="/SitePedro/assets/index-DvB_wa2k.js"></script>
     <link rel="stylesheet" crossorigin href="/SitePedro/assets/index-CkFKUbkj.css">
 
     <style>
-      /* =====================================================
-         PEDRO ARIA — ENHANCED ANIMATIONS & VISUAL EFFECTS
-         ===================================================== */
+      /* =========================================================
+         PEDRO ARIA — CINEMATIC MOBILE-FIRST
+         ========================================================= */
+      *, *::before, *::after { box-sizing: border-box; }
 
-      /* ── BASE ── */
+      html {
+        scroll-behavior: smooth;
+        -webkit-tap-highlight-color: transparent;
+      }
       html, body {
         overflow-x: hidden !important;
         width: 100%;
         max-width: 100vw;
-        margin: 0;
-        padding: 0;
-        scroll-behavior: smooth;
+        margin: 0; padding: 0;
       }
 
-      /* ── CUSTOM CURSOR (desktop) ── */
-      @media (pointer: fine) {
-        * { cursor: none !important; }
-
-        #cursor-dot,
-        #cursor-ring {
-          position: fixed;
-          top: 0; left: 0;
-          border-radius: 50%;
-          pointer-events: none;
-          z-index: 999999;
-          transform: translate(-50%, -50%);
-          transition: opacity 0.3s;
-        }
-
-        #cursor-dot {
-          width: 8px;
-          height: 8px;
-          background: hsl(32 100% 53%);
-          transition: transform 0.1s ease, opacity 0.3s;
-        }
-
-        #cursor-ring {
-          width: 36px;
-          height: 36px;
-          border: 2px solid hsl(32 100% 53% / 0.6);
-          transition: transform 0.18s ease, width 0.2s, height 0.2s, border-color 0.2s, opacity 0.3s;
-        }
-
-        a:hover ~ #cursor-ring,
-        button:hover ~ #cursor-ring {
-          width: 56px;
-          height: 56px;
-          border-color: hsl(32 100% 53%);
-        }
+      /* ── SCROLL PROGRESS ── */
+      #pa-progress {
+        position: fixed;
+        top: 0; left: 0; right: 0;
+        height: 3px;
+        z-index: 9999;
+        pointer-events: none;
+      }
+      #pa-progress span {
+        display: block;
+        height: 100%;
+        width: 0%;
+        background: linear-gradient(90deg, #FF8C00, #FFB347, #FF6B00);
+        box-shadow: 0 0 14px #FF8C00cc, 0 0 4px #FFB347;
+        border-radius: 0 3px 3px 0;
+        transition: width 0.08s linear;
       }
 
-      /* ── ANIMATED GRADIENT OVERLAY for hero ── */
-      .hero-shimmer::before {
+      /* ── AMBIENT GLOW ── */
+      #pa-ambient {
+        position: fixed; inset: 0;
+        pointer-events: none; z-index: 0;
+        overflow: hidden;
+      }
+      #pa-ambient::before {
         content: '';
         position: absolute;
-        inset: 0;
-        background: linear-gradient(
-          125deg,
-          transparent 0%,
-          hsl(32 100% 53% / 0.04) 40%,
-          transparent 60%,
-          hsl(32 100% 53% / 0.06) 80%,
-          transparent 100%
-        );
-        background-size: 300% 300%;
-        animation: shimmer-pan 8s ease-in-out infinite;
-        pointer-events: none;
-        z-index: 1;
+        width: 70vmax; height: 70vmax;
+        top: -20vmax; left: -20vmax;
+        background: radial-gradient(circle, #FF8C0016 0%, transparent 65%);
+        animation: ad1 22s ease-in-out infinite;
+      }
+      #pa-ambient::after {
+        content: '';
+        position: absolute;
+        width: 55vmax; height: 55vmax;
+        bottom: -10vmax; right: -10vmax;
+        background: radial-gradient(circle, #FF6B0012 0%, transparent 65%);
+        animation: ad2 28s ease-in-out infinite;
+      }
+      @keyframes ad1 {
+        0%,100% { transform: translate(0,0) scale(1); }
+        33% { transform: translate(5vw,3vh) scale(1.07); }
+        66% { transform: translate(-3vw,5vh) scale(0.94); }
+      }
+      @keyframes ad2 {
+        0%,100% { transform: translate(0,0) scale(1); }
+        40% { transform: translate(-4vw,-5vh) scale(1.1); }
+        70% { transform: translate(3vw,2vh) scale(0.95); }
       }
 
-      @keyframes shimmer-pan {
-        0%   { background-position: 0% 50%; }
-        50%  { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
+      /* ── GRAIN ── */
+      #pa-grain {
+        position: fixed; inset: 0;
+        pointer-events: none; z-index: 9997; opacity: 0.02;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+        background-size: 200px 200px;
       }
 
-      /* ── REVEAL ON SCROLL ── */
+      /* ── ROOT ENTRY ── */
+      #root {
+        position: relative; z-index: 1;
+        animation: rootIn 0.65s cubic-bezier(0.22,1,0.36,1) both;
+      }
+      @keyframes rootIn {
+        from { opacity: 0; transform: translateY(12px); }
+        to   { opacity: 1; transform: translateY(0); }
+      }
+
+      /* ── REVEAL ── */
       .reveal {
         opacity: 0;
-        transform: translateY(40px);
-        transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
-                    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+        transform: translateY(38px);
+        transition:
+          opacity 0.75s cubic-bezier(0.22,1,0.36,1),
+          transform 0.75s cubic-bezier(0.22,1,0.36,1);
+        will-change: opacity, transform;
       }
       .reveal.visible {
-        opacity: 1;
-        transform: translateY(0);
+        opacity: 1 !important;
+        transform: translateY(0) !important;
       }
 
-      /* ── SLIDE ANIMATIONS ── */
+      /* ── HERO SLIDES ── */
       .animate-slide-left {
-        animation: slideInLeft 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+        animation: slideL 0.9s cubic-bezier(0.22,1,0.36,1) both 0.1s;
       }
       .animate-slide-right {
-        animation: slideInRight 0.9s cubic-bezier(0.22, 1, 0.36, 1) both 0.15s;
+        animation: slideR 0.9s cubic-bezier(0.22,1,0.36,1) both 0.25s;
       }
-
-      @keyframes slideInLeft {
-        from { opacity: 0; transform: translateX(-60px); }
+      @keyframes slideL {
+        from { opacity: 0; transform: translateX(-52px); }
         to   { opacity: 1; transform: translateX(0); }
       }
-      @keyframes slideInRight {
-        from { opacity: 0; transform: translateX(60px); }
+      @keyframes slideR {
+        from { opacity: 0; transform: translateX(52px); }
         to   { opacity: 1; transform: translateX(0); }
       }
 
-      /* ── NEON GLOW BORDER ── */
+      /* ── NEON BORDER ── */
       .neon-border {
-        border: 1.5px solid hsl(32 100% 53% / 0.5);
+        border: 1.5px solid rgba(255,140,0,.45) !important;
         box-shadow:
-          0 0 12px hsl(32 100% 53% / 0.25),
-          0 0 40px hsl(32 100% 53% / 0.12),
-          inset 0 0 20px hsl(32 100% 53% / 0.05);
-        transition: box-shadow 0.3s ease, border-color 0.3s ease;
+          0 0 10px rgba(255,140,0,.2),
+          0 0 36px rgba(255,140,0,.1),
+          inset 0 0 18px rgba(255,140,0,.04) !important;
+        transition: box-shadow .4s ease, border-color .4s ease !important;
       }
       .neon-border:hover {
-        border-color: hsl(32 100% 53% / 0.8);
+        border-color: rgba(255,140,0,.8) !important;
         box-shadow:
-          0 0 20px hsl(32 100% 53% / 0.5),
-          0 0 60px hsl(32 100% 53% / 0.25),
-          inset 0 0 30px hsl(32 100% 53% / 0.08);
+          0 0 20px rgba(255,140,0,.5),
+          0 0 60px rgba(255,140,0,.22),
+          inset 0 0 28px rgba(255,140,0,.07) !important;
       }
 
       /* ── CARD HOVER ── */
       .card-hover {
-        transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
-                    box-shadow 0.35s ease;
+        transition:
+          transform .35s cubic-bezier(0.22,1,0.36,1),
+          box-shadow .35s ease !important;
+        will-change: transform;
       }
       .card-hover:hover {
-        transform: translateY(-8px) scale(1.015);
-        box-shadow: 0 24px 48px hsl(0 0% 0% / 0.5),
-                    0 0 30px hsl(32 100% 53% / 0.15);
+        transform: translateY(-7px) !important;
+        box-shadow: 0 22px 50px rgba(0,0,0,.55), 0 0 30px rgba(255,140,0,.14) !important;
       }
 
       /* ── ORANGE GRADIENT TEXT ── */
       .text-gradient-orange {
-        background: linear-gradient(135deg, hsl(32 100% 53%), hsl(20 100% 60%));
+        background: linear-gradient(135deg,#FF8C00 0%,#FFB347 55%,#FF6B00 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
       }
 
-      /* ── PULSE GLOW on CTA buttons ── */
+      /* ── CTA PULSE ── */
       .animate-pulse-glow {
-        animation: pulseGlow 2.8s ease-in-out infinite;
+        animation: ctaP 2.6s ease-in-out infinite !important;
+        position: relative; z-index: 1;
       }
-
-      @keyframes pulseGlow {
-        0%, 100% {
-          box-shadow:
-            0 0 18px hsl(32 100% 53% / 0.45),
-            0 0 50px hsl(32 100% 53% / 0.2);
+      @keyframes ctaP {
+        0%,100% {
+          box-shadow: 0 0 16px rgba(255,140,0,.5), 0 0 50px rgba(255,140,0,.2), 0 4px 22px rgba(0,0,0,.4);
         }
         50% {
-          box-shadow:
-            0 0 32px hsl(32 100% 53% / 0.75),
-            0 0 80px hsl(32 100% 53% / 0.4);
+          box-shadow: 0 0 32px rgba(255,140,0,.85), 0 0 90px rgba(255,140,0,.4), 0 4px 30px rgba(0,0,0,.5);
         }
       }
 
       /* ── FLOAT ── */
       .animate-float {
-        animation: float 3.5s ease-in-out infinite;
+        animation: flt 3.8s ease-in-out infinite !important;
       }
-      @keyframes float {
-        0%, 100% { transform: translateY(0); }
-        50%       { transform: translateY(-10px); }
-      }
-
-      /* ── COUNTDOWN NUMBER FLIP ── */
-      .animate-countdown span {
-        transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+      @keyframes flt {
+        0%,100% { transform: translateY(0); }
+        50%      { transform: translateY(-10px); }
       }
 
-      /* ── PARTICLE SPARKS (pure CSS) ── */
-      @keyframes spark {
-        0%   { transform: translate(0, 0) scale(1); opacity: 1; }
-        100% { transform: translate(var(--dx), var(--dy)) scale(0); opacity: 0; }
-      }
-
-      /* ── HERO IMAGE – breathe animation ── */
-      .hero-image-wrap img {
-        animation: breathe 6s ease-in-out infinite;
+      /* ── HERO IMAGE BREATHE ── */
+      .animate-slide-right img.rounded-2xl,
+      .relative img.rounded-2xl {
+        animation: breathe 7s ease-in-out infinite;
       }
       @keyframes breathe {
-        0%, 100% { transform: scale(1);    filter: brightness(1); }
-        50%       { transform: scale(1.02); filter: brightness(1.05); }
+        0%,100% { transform: scale(1); }
+        50%      { transform: scale(1.018); }
       }
 
-      /* ── TYPEWRITER cursor blink ── */
-      .typewriter-cursor::after {
-        content: '|';
-        animation: blink 0.8s step-end infinite;
-        color: hsl(32 100% 53%);
-        font-weight: 300;
-        margin-left: 2px;
+      /* ── FIRE SPARKS ── */
+      .pa-sparks {
+        position: absolute; inset: 0;
+        pointer-events: none; overflow: hidden; z-index: 2;
       }
-      @keyframes blink {
-        0%, 100% { opacity: 1; }
-        50%       { opacity: 0; }
-      }
-
-      /* ── SCROLL PROGRESS BAR ── */
-      #scroll-progress {
-        position: fixed;
-        top: 0; left: 0;
-        height: 3px;
-        background: linear-gradient(90deg, hsl(32 100% 53%), hsl(20 100% 65%));
-        z-index: 99999;
-        transform-origin: left;
-        transform: scaleX(0);
-        transition: transform 0.1s linear;
-        box-shadow: 0 0 10px hsl(32 100% 53% / 0.7);
-      }
-
-      /* ── FLOATING ORBS in background ── */
-      .bg-orb {
-        position: fixed;
+      .pa-spark {
+        position: absolute;
         border-radius: 50%;
-        filter: blur(80px);
-        opacity: 0.07;
-        pointer-events: none;
-        z-index: 0;
-        animation: orbDrift 18s ease-in-out infinite;
+        animation: sparkRise var(--dur,1.3s) ease-out var(--delay,0s) both;
       }
-      .bg-orb-1 {
-        width: 500px; height: 500px;
-        background: hsl(32 100% 53%);
-        top: -150px; left: -150px;
-        animation-duration: 20s;
-      }
-      .bg-orb-2 {
-        width: 400px; height: 400px;
-        background: hsl(20 100% 45%);
-        bottom: 20%; right: -100px;
-        animation-duration: 25s;
-        animation-delay: -8s;
-      }
-      .bg-orb-3 {
-        width: 300px; height: 300px;
-        background: hsl(32 100% 53%);
-        top: 50%; left: 40%;
-        animation-duration: 30s;
-        animation-delay: -15s;
-      }
-      @keyframes orbDrift {
-        0%, 100% { transform: translate(0, 0) scale(1); }
-        33%       { transform: translate(40px, -30px) scale(1.05); }
-        66%       { transform: translate(-20px, 20px) scale(0.95); }
+      @keyframes sparkRise {
+        0%   { opacity: 1; transform: translate(0,0) scale(1); }
+        100% { opacity: 0; transform: translate(var(--dx,0px),var(--dy,-90px)) scale(0.08); }
       }
 
-      /* ── SECTION ENTRANCE VARIANTS ── */
-      .reveal-left {
-        opacity: 0;
-        transform: translateX(-50px);
-        transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
-                    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
-      }
-      .reveal-right {
-        opacity: 0;
-        transform: translateX(50px);
-        transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
-                    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
-      }
-      .reveal-left.visible,
-      .reveal-right.visible {
-        opacity: 1;
-        transform: translateX(0);
+      /* ── SECTION DIVIDER ── */
+      section + section::before {
+        content: '';
+        display: block;
+        height: 1px; width: 75%; margin: 0 auto;
+        background: linear-gradient(90deg, transparent, rgba(255,140,0,.25) 30%, rgba(255,140,0,.25) 70%, transparent);
       }
 
-      /* ── STAGGERED CARD REVEALS ── */
-      .reveal[style*="animation-delay"] {
-        transition-delay: inherit;
-      }
-
-      /* ── BUTTON RIPPLE ── */
-      button, a[href] {
+      /* ── DIAGONAL HERO EDGE ── */
+      section:first-of-type {
         position: relative;
-        overflow: hidden;
       }
-      button::after, a[href]::after {
+      section:first-of-type::after {
         content: '';
         position: absolute;
-        inset: 0;
-        background: radial-gradient(circle at var(--ripple-x, 50%) var(--ripple-y, 50%),
-          hsl(0 0% 100% / 0.15) 0%, transparent 70%);
-        opacity: 0;
-        transform: scale(0);
-        transition: transform 0.5s ease, opacity 0.5s ease;
+        bottom: -1px; left: 0; right: 0; height: 60px;
+        background: hsl(0 0% 0%);
+        clip-path: polygon(0 100%, 100% 0, 100% 100%);
+        pointer-events: none; z-index: 3;
+      }
+
+      /* ── SHIMMER on price card ── */
+      .neon-border.bg-card {
+        position: relative; overflow: hidden;
+      }
+      .neon-border.bg-card::before {
+        content: '';
+        position: absolute;
+        top: -50%; left: -60%;
+        width: 40%; height: 200%;
+        background: linear-gradient(105deg,transparent 0%,rgba(255,140,0,.07) 50%,transparent 100%);
+        animation: shim 4s ease-in-out infinite 1.2s;
+        pointer-events: none; z-index: 0;
+      }
+      @keyframes shim {
+        0%   { left: -60%; opacity: 0; }
+        10%  { opacity: 1; }
+        90%  { opacity: 1; }
+        100% { left: 120%; opacity: 0; }
+      }
+
+      /* ── VIDEO GLOW RING ── */
+      .rounded-2xl.overflow-hidden .aspect-video {
+        position: relative;
+      }
+
+      /* ── TESTIMONIALS hover ── */
+      .bg-card.border.rounded-xl.overflow-hidden {
+        transition: transform .35s cubic-bezier(0.22,1,0.36,1), box-shadow .35s ease !important;
+      }
+      .bg-card.border.rounded-xl.overflow-hidden:hover {
+        transform: scale(1.03) !important;
+        box-shadow: 0 18px 42px rgba(0,0,0,.65), 0 0 22px rgba(255,140,0,.18) !important;
+      }
+
+      /* ── DISCOUNT BOX ── */
+      .bg-destructive.rounded-2xl {
+        background: linear-gradient(135deg,#c0392b,#e74c3c) !important;
+        box-shadow: 0 8px 32px rgba(192,57,43,.55) !important;
+        animation: discPop 3s ease-in-out infinite;
+      }
+      @keyframes discPop {
+        0%,100% { transform: scale(1); }
+        50%      { transform: scale(1.012); }
+      }
+
+      /* ── TOP BANNER ── */
+      .bg-destructive.py-2\\.5 {
+        background: linear-gradient(90deg,#991b1b,#b91c1c,#991b1b) !important;
+        background-size: 200% 100% !important;
+        animation: bannerScroll 4s linear infinite !important;
+      }
+      @keyframes bannerScroll {
+        0%   { background-position: 0% 50%; }
+        100% { background-position: 200% 50%; }
+      }
+
+      /* ── LOGO ── */
+      img[alt*="Logo"] {
+        filter: drop-shadow(0 0 10px rgba(255,140,0,.32));
+        transition: filter .3s ease;
+      }
+      img[alt*="Logo"]:hover {
+        filter: drop-shadow(0 0 22px rgba(255,140,0,.7));
+      }
+
+      /* ── INPUTS ── */
+      input:focus, textarea:focus {
+        outline: none !important;
+        border-color: #FF8C00 !important;
+        box-shadow: 0 0 0 3px rgba(255,140,0,.18), 0 0 16px rgba(255,140,0,.12) !important;
+        transition: box-shadow .25s ease, border-color .25s ease !important;
+      }
+
+      /* ── SCROLLBAR ── */
+      ::-webkit-scrollbar { width: 4px; }
+      ::-webkit-scrollbar-track { background: #000; }
+      ::-webkit-scrollbar-thumb {
+        background: linear-gradient(180deg,#FF8C00,#FF6B00);
+        border-radius: 4px;
+      }
+
+      /* ── SELECTION ── */
+      ::selection { background: rgba(255,140,0,.33); color: #fff; }
+
+      /* ── FOOTER LINKS ── */
+      footer button, footer a {
+        min-height: auto !important;
+        padding: 4px 2px !important;
+        position: relative;
+      }
+      footer button::after, footer a::after {
+        content: '';
+        position: absolute;
+        bottom: 0; left: 0;
+        width: 0; height: 1px;
+        background: #FF8C00;
+        transition: width .3s ease;
+      }
+      footer button:hover::after, footer a:hover::after { width: 100%; }
+
+      /* =========================================================
+         WHATSAPP FLOATING BUTTON — MOBILE-FIRST PILL
+         ========================================================= */
+      #pa-wa-btn {
+        position: fixed;
+        bottom: 18px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 9998;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+
+        height: 56px;
+        padding: 0 30px;
+        border-radius: 100px;
+        border: none;
+        cursor: pointer;
+        text-decoration: none;
+
+        background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+        box-shadow:
+          0 4px 20px rgba(34,197,94,.55),
+          0 0 0 0 rgba(34,197,94,.4);
+
+        color: #fff;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 800;
+        font-size: 15px;
+        letter-spacing: 0.3px;
+        white-space: nowrap;
+
+        animation: waPulse 2.4s ease-in-out infinite;
+        transition: transform 0.18s ease, box-shadow 0.18s ease;
+
+        /* safe area on iPhones */
+        padding-bottom: max(0px, env(safe-area-inset-bottom));
+      }
+      #pa-wa-btn:active {
+        transform: translateX(-50%) scale(0.95);
+        animation: none;
+        box-shadow: 0 2px 10px rgba(34,197,94,.4);
+      }
+
+      @keyframes waPulse {
+        0%,100% {
+          box-shadow:
+            0 4px 20px rgba(34,197,94,.55),
+            0 0 0 0 rgba(34,197,94,.4);
+        }
+        50% {
+          box-shadow:
+            0 6px 32px rgba(34,197,94,.75),
+            0 0 0 12px rgba(34,197,94,0);
+        }
+      }
+
+      #pa-wa-btn svg {
+        width: 24px; height: 24px;
+        flex-shrink: 0;
+      }
+
+      #pa-wa-icon-label {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 800;
+        font-size: 15px;
+        color: #fff;
         pointer-events: none;
       }
-      button:active::after, a[href]:active::after {
-        opacity: 1;
-        transform: scale(2.5);
-        transition: none;
+
+      /* Desktop: move to bottom-right */
+      @media (min-width: 769px) {
+        #pa-wa-btn {
+          left: auto;
+          right: 28px;
+          bottom: 28px;
+          transform: none;
+        }
+        #pa-wa-btn:active {
+          transform: scale(0.95);
+        }
       }
 
-      /* ── STAT COUNTER NUMBERS ── */
-      .stat-number {
-        font-variant-numeric: tabular-nums;
-        transition: all 0.05s;
+      /* Padding so content isn't hidden behind button */
+      footer {
+        padding-bottom: 80px !important;
       }
 
-      /* ── MOBILE FIXES ── */
+      /* HIDE React's original WA button if it exists */
+      a[aria-label="Contato WhatsApp"],
+      a[aria-label*="WhatsApp"]:not(#pa-wa-btn) {
+        display: none !important;
+      }
+
+      /* ── MOBILE GLOBAL ── */
       @media (max-width: 768px) {
         img {
           max-width: 100% !important;
           height: auto !important;
           object-fit: contain;
         }
-
-        button, a {
+        button:not(#pa-wa-btn),
+        a:not(#pa-wa-btn) {
           white-space: normal !important;
           max-width: 100% !important;
           height: auto !important;
@@ -340,344 +454,186 @@
           padding-bottom: 12px !important;
           line-height: 1.2 !important;
         }
-
-        .bg-orb { display: none; }
-      }
-
-      /* ── GRAIN TEXTURE overlay ── */
-      body::after {
-        content: '';
-        position: fixed;
-        inset: 0;
-        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
-        background-repeat: repeat;
-        background-size: 180px 180px;
-        opacity: 0.018;
-        pointer-events: none;
-        z-index: 99998;
-      }
-
-      /* ── HIGHLIGHT UNDERLINE animation ── */
-      .animated-underline {
-        position: relative;
-        display: inline-block;
-      }
-      .animated-underline::after {
-        content: '';
-        position: absolute;
-        bottom: -3px; left: 0;
-        width: 0; height: 2px;
-        background: hsl(32 100% 53%);
-        border-radius: 2px;
-        transition: width 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-        box-shadow: 0 0 8px hsl(32 100% 53% / 0.6);
-      }
-      .animated-underline:hover::after { width: 100%; }
-
-      /* ── HERO STATS ROW ── */
-      .stat-bar-fill {
-        animation: fillBar 1.5s cubic-bezier(0.22, 1, 0.36, 1) both;
-      }
-      @keyframes fillBar {
-        from { width: 0; }
-      }
-
-      /* ── LOADING ENTRANCE for #root ── */
-      #root {
-        animation: rootFadeIn 0.6s ease both;
-      }
-      @keyframes rootFadeIn {
-        from { opacity: 0; }
-        to   { opacity: 1; }
-      }
-
-      /* ── SECTION DIVIDER with orange line ── */
-      section + section::before {
-        content: '';
-        display: block;
-        height: 1px;
-        background: linear-gradient(
-          90deg,
-          transparent,
-          hsl(32 100% 53% / 0.3) 30%,
-          hsl(32 100% 53% / 0.3) 70%,
-          transparent
-        );
-        margin: 0 auto;
-        width: 80%;
-      }
-
-      /* ── MAGNETIC BUTTON effect helper ── */
-      .magnetic {
-        display: inline-block;
-        transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1);
       }
     </style>
   </head>
 
   <body>
-    <!-- Scroll progress bar -->
-    <div id="scroll-progress"></div>
+    <!-- Scroll progress -->
+    <div id="pa-progress" aria-hidden="true"><span></span></div>
 
-    <!-- Floating background orbs -->
-    <div class="bg-orb bg-orb-1" aria-hidden="true"></div>
-    <div class="bg-orb bg-orb-2" aria-hidden="true"></div>
-    <div class="bg-orb bg-orb-3" aria-hidden="true"></div>
+    <!-- Ambient glow -->
+    <div id="pa-ambient" aria-hidden="true"></div>
 
-    <!-- Custom cursor (desktop only) -->
-    <div id="cursor-dot"  aria-hidden="true"></div>
-    <div id="cursor-ring" aria-hidden="true"></div>
+    <!-- Film grain -->
+    <div id="pa-grain" aria-hidden="true"></div>
 
-    <!-- React app root -->
+    <!-- React app -->
     <div id="root"></div>
 
+    <!-- OUR WhatsApp pill button (replaces React's) -->
+    <a
+      id="pa-wa-btn"
+      href="https://wa.me/5500000000000"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Falar com o Personal no WhatsApp"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+      </svg>
+      <span id="pa-wa-icon-label">Falar com Personal</span>
+    </a>
+
     <script>
-      /* ── SCROLL PROGRESS ── */
+      /* ── 1. SCROLL PROGRESS ── */
       (function () {
-        const bar = document.getElementById('scroll-progress');
-        const update = () => {
+        const bar = document.querySelector('#pa-progress span');
+        function tick() {
           const max = document.documentElement.scrollHeight - window.innerHeight;
-          const pct = max > 0 ? window.scrollY / max : 0;
-          bar.style.transform = `scaleX(${pct})`;
-        };
-        window.addEventListener('scroll', update, { passive: true });
-      })();
-
-      /* ── CUSTOM CURSOR ── */
-      (function () {
-        const dot  = document.getElementById('cursor-dot');
-        const ring = document.getElementById('cursor-ring');
-        if (!dot || !ring) return;
-
-        let mx = 0, my = 0, rx = 0, ry = 0;
-        let hidden = false;
-
-        document.addEventListener('mousemove', e => {
-          mx = e.clientX; my = e.clientY;
-          dot.style.left  = mx + 'px';
-          dot.style.top   = my + 'px';
-          if (hidden) {
-            dot.style.opacity = ring.style.opacity = '1';
-            hidden = false;
-          }
-        });
-
-        document.addEventListener('mouseleave', () => {
-          dot.style.opacity = ring.style.opacity = '0';
-          hidden = true;
-        });
-
-        const hoverEls = ['a', 'button', '[role="button"]'];
-        document.addEventListener('mouseover', e => {
-          if (hoverEls.some(s => e.target.closest(s))) {
-            dot.style.transform  = 'translate(-50%,-50%) scale(2.2)';
-            ring.style.width     = '52px';
-            ring.style.height    = '52px';
-            ring.style.borderColor = 'hsl(32,100%,53%)';
-          }
-        });
-        document.addEventListener('mouseout', e => {
-          if (hoverEls.some(s => e.target.closest(s))) {
-            dot.style.transform  = 'translate(-50%,-50%) scale(1)';
-            ring.style.width     = '36px';
-            ring.style.height    = '36px';
-            ring.style.borderColor = 'hsl(32,100%,53%,0.6)';
-          }
-        });
-
-        // Ring trails with RAF
-        const lerp = (a, b, t) => a + (b - a) * t;
-        const tick = () => {
-          rx = lerp(rx, mx, 0.12);
-          ry = lerp(ry, my, 0.12);
-          ring.style.left = rx + 'px';
-          ring.style.top  = ry + 'px';
-          requestAnimationFrame(tick);
-        };
-        requestAnimationFrame(tick);
-      })();
-
-      /* ── REVEAL on scroll (IntersectionObserver) ── */
-      (function () {
-        const selectors = '.reveal, .reveal-left, .reveal-right';
-        const els = document.querySelectorAll(selectors);
-
-        if (!els.length) {
-          // React hasn't rendered yet — wait for DOMContentLoaded + a tick
-          const tryObserve = () => {
-            const all = document.querySelectorAll(selectors);
-            observe(all);
-          };
-          window.addEventListener('load', tryObserve);
-          // Also retry after React mounts
-          setTimeout(tryObserve, 500);
-          setTimeout(tryObserve, 1500);
-          return;
+          const pct = max > 0 ? Math.min(window.scrollY / max * 100, 100) : 0;
+          bar.style.width = pct + '%';
         }
+        window.addEventListener('scroll', tick, { passive: true });
+      })();
 
-        observe(els);
+      /* ── 2. REVEAL ON SCROLL ── */
+      (function () {
+        let obs = null;
 
-        function observe(nodes) {
-          const io = new IntersectionObserver(entries => {
-            entries.forEach(e => {
-              if (e.isIntersecting) {
-                // Stagger siblings
-                const siblings = e.target.parentElement
-                  ? [...e.target.parentElement.children].filter(c => c.classList.contains('reveal'))
-                  : [];
-                const idx = siblings.indexOf(e.target);
-                e.target.style.transitionDelay = idx > 0 ? (idx * 0.1) + 's' : '0s';
-                e.target.classList.add('visible');
-                io.unobserve(e.target);
-              }
+        function makeObs() {
+          if (obs) obs.disconnect();
+          obs = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+              if (!entry.isIntersecting) return;
+              const el = entry.target;
+              const siblings = el.parentElement
+                ? Array.from(el.parentElement.children).filter(c => c.classList.contains('reveal'))
+                : [];
+              const idx = Math.max(siblings.indexOf(el), 0);
+              el.style.transitionDelay = idx > 0 ? (idx * 0.12) + 's' : '0s';
+              el.classList.add('visible');
+              obs.unobserve(el);
             });
-          }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-
-          nodes.forEach(n => io.observe(n));
+          }, { threshold: 0.07, rootMargin: '0px 0px -28px 0px' });
         }
+
+        function attach() {
+          const els = document.querySelectorAll('.reveal:not(.visible)');
+          if (!els.length) return false;
+          if (!obs) makeObs();
+          els.forEach(el => obs.observe(el));
+          return true;
+        }
+
+        // Retry until React renders
+        const delays = [200, 500, 900, 1500, 2500];
+        delays.forEach(d => setTimeout(attach, d));
+
+        // MutationObserver for React updates
+        const mo = new MutationObserver(() => attach());
+        const root = document.getElementById('root');
+        if (root) mo.observe(root, { childList: true, subtree: true });
       })();
 
-      /* ── RE-OBSERVE after React renders ── */
+      /* ── 3. HERO PARALLAX ── */
       (function () {
-        let tried = 0;
-        function tryReveal() {
-          const all = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
-          if (!all.length && tried < 10) {
-            tried++;
-            setTimeout(tryReveal, 400);
-            return;
-          }
-          const io = new IntersectionObserver(entries => {
-            entries.forEach(e => {
-              if (e.isIntersecting) {
-                const siblings = e.target.parentElement
-                  ? [...e.target.parentElement.children].filter(c => c.classList.contains('reveal'))
-                  : [];
-                const idx = siblings.indexOf(e.target);
-                e.target.style.transitionDelay = idx > 0 ? (idx * 0.1) + 's' : '0s';
-                e.target.classList.add('visible');
-                io.unobserve(e.target);
-              }
-            });
-          }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-          all.forEach(n => io.observe(n));
-        }
-        window.addEventListener('load', () => setTimeout(tryReveal, 300));
-      })();
-
-      /* ── RIPPLE on buttons / links ── */
-      document.addEventListener('pointerdown', e => {
-        const el = e.target.closest('button, a');
-        if (!el) return;
-        const rect = el.getBoundingClientRect();
-        el.style.setProperty('--ripple-x', ((e.clientX - rect.left) / rect.width * 100) + '%');
-        el.style.setProperty('--ripple-y', ((e.clientY - rect.top)  / rect.height * 100) + '%');
-      });
-
-      /* ── COUNTER ANIMATION for stat numbers ── */
-      function animateCount(el, end, duration) {
-        const start = 0;
-        const startTime = performance.now();
-        const step = (now) => {
-          const elapsed = now - startTime;
-          const progress = Math.min(elapsed / duration, 1);
-          const eased = 1 - Math.pow(1 - progress, 3); // ease-out cubic
-          el.textContent = Math.round(start + (end - start) * eased) + '+';
-          if (progress < 1) requestAnimationFrame(step);
-        };
-        requestAnimationFrame(step);
-      }
-
-      // Observe stat numbers when they appear
-      (function () {
-        const io = new IntersectionObserver(entries => {
-          entries.forEach(e => {
-            if (e.isIntersecting) {
-              const el = e.target;
-              const val = parseInt(el.dataset.count || el.textContent);
-              if (!isNaN(val)) animateCount(el, val, 1800);
-              io.unobserve(el);
-            }
+        let tick = false;
+        window.addEventListener('scroll', () => {
+          if (tick) return;
+          tick = true;
+          requestAnimationFrame(() => {
+            const hero = document.querySelector('section');
+            if (hero) hero.style.backgroundPositionY = `calc(center + ${window.scrollY * 0.28}px)`;
+            tick = false;
           });
-        }, { threshold: 0.5 });
-
-        // Try after React mounts
-        setTimeout(() => {
-          document.querySelectorAll('.stat-number, [data-count]').forEach(n => io.observe(n));
-        }, 1000);
+        }, { passive: true });
       })();
 
-      /* ── MAGNETIC BUTTONS ── */
+      /* ── 4. FIRE SPARKS ── */
       (function () {
-        function applyMagnetic() {
-          document.querySelectorAll('.magnetic').forEach(el => {
-            el.addEventListener('mousemove', e => {
-              const r = el.getBoundingClientRect();
-              const dx = e.clientX - (r.left + r.width / 2);
-              const dy = e.clientY - (r.top  + r.height / 2);
-              el.style.transform = `translate(${dx * 0.25}px, ${dy * 0.25}px)`;
-            });
-            el.addEventListener('mouseleave', () => {
-              el.style.transform = 'translate(0, 0)';
-            });
-          });
-        }
-        window.addEventListener('load', () => setTimeout(applyMagnetic, 800));
-      })();
-
-      /* ── HERO PARTICLES (fire sparks) ── */
-      (function () {
-        function trySpawn() {
-          const hero = document.querySelector('section');
-          if (!hero) { setTimeout(trySpawn, 500); return; }
-
-          for (let i = 0; i < 12; i++) {
-            setTimeout(() => spawnSpark(hero), i * 180);
-          }
-          setInterval(() => spawnSpark(hero), 900);
-        }
+        const COLORS = ['#FF8C00','#FFB347','#FF6B00','#FFC857','#FFD580'];
 
         function spawnSpark(container) {
-          const s = document.createElement('span');
-          const size = Math.random() * 5 + 2;
-          const x = Math.random() * 100;
-          const dx = (Math.random() - 0.5) * 80 + 'px';
-          const dy = -(Math.random() * 120 + 60) + 'px';
+          const sparks = container.querySelector('.pa-sparks') || (() => {
+            const d = document.createElement('div');
+            d.className = 'pa-sparks';
+            container.style.position = 'relative';
+            container.appendChild(d);
+            return d;
+          })();
 
+          const s = document.createElement('span');
+          s.className = 'pa-spark';
+          const size = Math.random() * 5 + 2;
+          const color = COLORS[Math.floor(Math.random() * COLORS.length)];
           Object.assign(s.style, {
-            position: 'absolute',
-            bottom: '0',
-            left: x + '%',
             width: size + 'px',
             height: size + 'px',
-            borderRadius: '50%',
-            background: Math.random() > 0.5
-              ? 'hsl(32 100% 53%)'
-              : 'hsl(20 100% 70%)',
-            boxShadow: '0 0 6px hsl(32 100% 53% / 0.8)',
-            pointerEvents: 'none',
-            zIndex: '2',
-            '--dx': dx,
-            '--dy': dy,
-            animation: `spark ${Math.random() * 1.5 + 1}s ease-out forwards`,
+            bottom: (Math.random() * 30 + 5) + '%',
+            left: (Math.random() * 88 + 6) + '%',
+            background: color,
+            boxShadow: `0 0 ${size * 2}px ${color}`,
+            '--dx': ((Math.random() - 0.5) * 72) + 'px',
+            '--dy': -(Math.random() * 120 + 55) + 'px',
+            '--dur': (Math.random() * 1.2 + 0.9).toFixed(2) + 's',
+            '--delay': '0s',
           });
-
-          container.appendChild(s);
-          setTimeout(() => s.remove(), 2600);
+          sparks.appendChild(s);
+          setTimeout(() => s.remove(), 2400);
         }
 
-        window.addEventListener('load', () => setTimeout(trySpawn, 800));
+        function start() {
+          const hero = document.querySelector('section');
+          if (!hero) { setTimeout(start, 700); return; }
+          for (let i = 0; i < 8; i++) setTimeout(() => spawnSpark(hero), i * 240);
+          setInterval(() => spawnSpark(hero), 820);
+        }
+        window.addEventListener('load', () => setTimeout(start, 900));
       })();
 
-      /* ── SMOOTH PARALLAX on hero background ── */
+      /* ── 5. TAP RIPPLE ── */
       (function () {
-        const update = () => {
-          const hero = document.querySelector('section');
-          if (!hero) return;
-          const y = window.scrollY;
-          hero.style.backgroundPositionY = `calc(center + ${y * 0.3}px)`;
-        };
-        window.addEventListener('scroll', update, { passive: true });
+        const style = document.createElement('style');
+        style.textContent = '@keyframes ripA{to{transform:scale(1);opacity:0;}}';
+        document.head.appendChild(style);
+
+        document.addEventListener('pointerdown', e => {
+          const btn = e.target.closest('button, a:not(#pa-wa-btn)');
+          if (!btn) return;
+          const rect = btn.getBoundingClientRect();
+          const size = Math.max(rect.width, rect.height) * 2.2;
+          const rip = document.createElement('span');
+          Object.assign(rip.style, {
+            position: 'absolute',
+            left: (e.clientX - rect.left - size / 2) + 'px',
+            top:  (e.clientY - rect.top  - size / 2) + 'px',
+            width: size + 'px', height: size + 'px',
+            borderRadius: '50%',
+            background: 'rgba(255,255,255,0.11)',
+            transform: 'scale(0)',
+            animation: 'ripA 0.55s cubic-bezier(0.22,1,0.36,1) forwards',
+            pointerEvents: 'none', zIndex: '10',
+          });
+          if (getComputedStyle(btn).position === 'static') btn.style.position = 'relative';
+          btn.style.overflow = 'hidden';
+          btn.appendChild(rip);
+          setTimeout(() => rip.remove(), 600);
+        });
+      })();
+
+      /* ── 6. WA BUTTON HREF SYNC (if React renders its own, hide it) ── */
+      (function () {
+        const interval = setInterval(() => {
+          const reactWA = document.querySelector('a[aria-label="Contato WhatsApp"]');
+          if (reactWA) {
+            // Grab the href from React's button and use it in ours
+            const href = reactWA.getAttribute('href');
+            if (href) document.getElementById('pa-wa-btn').setAttribute('href', href);
+            reactWA.style.display = 'none';
+          }
+        }, 500);
+        setTimeout(() => clearInterval(interval), 8000);
       })();
 
     </script>
