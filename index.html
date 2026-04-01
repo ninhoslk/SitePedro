@@ -21,43 +21,665 @@
     <link rel="stylesheet" crossorigin href="/SitePedro/assets/index-CkFKUbkj.css">
 
     <style>
-      /* =======================================================
-         CORREÇÃO SEGURA PARA CELULAR
-         Focada apenas em evitar vazamentos e tela preta.
-         ======================================================= */
-      
-      /* 1. Trava o tamanho máximo da página para remover as bordas pretas laterais */
+      /* =====================================================
+         PEDRO ARIA — ENHANCED ANIMATIONS & VISUAL EFFECTS
+         ===================================================== */
+
+      /* ── BASE ── */
       html, body {
         overflow-x: hidden !important;
         width: 100%;
         max-width: 100vw;
         margin: 0;
         padding: 0;
+        scroll-behavior: smooth;
       }
 
+      /* ── CUSTOM CURSOR (desktop) ── */
+      @media (pointer: fine) {
+        * { cursor: none !important; }
+
+        #cursor-dot,
+        #cursor-ring {
+          position: fixed;
+          top: 0; left: 0;
+          border-radius: 50%;
+          pointer-events: none;
+          z-index: 999999;
+          transform: translate(-50%, -50%);
+          transition: opacity 0.3s;
+        }
+
+        #cursor-dot {
+          width: 8px;
+          height: 8px;
+          background: hsl(32 100% 53%);
+          transition: transform 0.1s ease, opacity 0.3s;
+        }
+
+        #cursor-ring {
+          width: 36px;
+          height: 36px;
+          border: 2px solid hsl(32 100% 53% / 0.6);
+          transition: transform 0.18s ease, width 0.2s, height 0.2s, border-color 0.2s, opacity 0.3s;
+        }
+
+        a:hover ~ #cursor-ring,
+        button:hover ~ #cursor-ring {
+          width: 56px;
+          height: 56px;
+          border-color: hsl(32 100% 53%);
+        }
+      }
+
+      /* ── ANIMATED GRADIENT OVERLAY for hero ── */
+      .hero-shimmer::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          125deg,
+          transparent 0%,
+          hsl(32 100% 53% / 0.04) 40%,
+          transparent 60%,
+          hsl(32 100% 53% / 0.06) 80%,
+          transparent 100%
+        );
+        background-size: 300% 300%;
+        animation: shimmer-pan 8s ease-in-out infinite;
+        pointer-events: none;
+        z-index: 1;
+      }
+
+      @keyframes shimmer-pan {
+        0%   { background-position: 0% 50%; }
+        50%  { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+      }
+
+      /* ── REVEAL ON SCROLL ── */
+      .reveal {
+        opacity: 0;
+        transform: translateY(40px);
+        transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+                    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* ── SLIDE ANIMATIONS ── */
+      .animate-slide-left {
+        animation: slideInLeft 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+      }
+      .animate-slide-right {
+        animation: slideInRight 0.9s cubic-bezier(0.22, 1, 0.36, 1) both 0.15s;
+      }
+
+      @keyframes slideInLeft {
+        from { opacity: 0; transform: translateX(-60px); }
+        to   { opacity: 1; transform: translateX(0); }
+      }
+      @keyframes slideInRight {
+        from { opacity: 0; transform: translateX(60px); }
+        to   { opacity: 1; transform: translateX(0); }
+      }
+
+      /* ── NEON GLOW BORDER ── */
+      .neon-border {
+        border: 1.5px solid hsl(32 100% 53% / 0.5);
+        box-shadow:
+          0 0 12px hsl(32 100% 53% / 0.25),
+          0 0 40px hsl(32 100% 53% / 0.12),
+          inset 0 0 20px hsl(32 100% 53% / 0.05);
+        transition: box-shadow 0.3s ease, border-color 0.3s ease;
+      }
+      .neon-border:hover {
+        border-color: hsl(32 100% 53% / 0.8);
+        box-shadow:
+          0 0 20px hsl(32 100% 53% / 0.5),
+          0 0 60px hsl(32 100% 53% / 0.25),
+          inset 0 0 30px hsl(32 100% 53% / 0.08);
+      }
+
+      /* ── CARD HOVER ── */
+      .card-hover {
+        transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+                    box-shadow 0.35s ease;
+      }
+      .card-hover:hover {
+        transform: translateY(-8px) scale(1.015);
+        box-shadow: 0 24px 48px hsl(0 0% 0% / 0.5),
+                    0 0 30px hsl(32 100% 53% / 0.15);
+      }
+
+      /* ── ORANGE GRADIENT TEXT ── */
+      .text-gradient-orange {
+        background: linear-gradient(135deg, hsl(32 100% 53%), hsl(20 100% 60%));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      /* ── PULSE GLOW on CTA buttons ── */
+      .animate-pulse-glow {
+        animation: pulseGlow 2.8s ease-in-out infinite;
+      }
+
+      @keyframes pulseGlow {
+        0%, 100% {
+          box-shadow:
+            0 0 18px hsl(32 100% 53% / 0.45),
+            0 0 50px hsl(32 100% 53% / 0.2);
+        }
+        50% {
+          box-shadow:
+            0 0 32px hsl(32 100% 53% / 0.75),
+            0 0 80px hsl(32 100% 53% / 0.4);
+        }
+      }
+
+      /* ── FLOAT ── */
+      .animate-float {
+        animation: float 3.5s ease-in-out infinite;
+      }
+      @keyframes float {
+        0%, 100% { transform: translateY(0); }
+        50%       { transform: translateY(-10px); }
+      }
+
+      /* ── COUNTDOWN NUMBER FLIP ── */
+      .animate-countdown span {
+        transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+
+      /* ── PARTICLE SPARKS (pure CSS) ── */
+      @keyframes spark {
+        0%   { transform: translate(0, 0) scale(1); opacity: 1; }
+        100% { transform: translate(var(--dx), var(--dy)) scale(0); opacity: 0; }
+      }
+
+      /* ── HERO IMAGE – breathe animation ── */
+      .hero-image-wrap img {
+        animation: breathe 6s ease-in-out infinite;
+      }
+      @keyframes breathe {
+        0%, 100% { transform: scale(1);    filter: brightness(1); }
+        50%       { transform: scale(1.02); filter: brightness(1.05); }
+      }
+
+      /* ── TYPEWRITER cursor blink ── */
+      .typewriter-cursor::after {
+        content: '|';
+        animation: blink 0.8s step-end infinite;
+        color: hsl(32 100% 53%);
+        font-weight: 300;
+        margin-left: 2px;
+      }
+      @keyframes blink {
+        0%, 100% { opacity: 1; }
+        50%       { opacity: 0; }
+      }
+
+      /* ── SCROLL PROGRESS BAR ── */
+      #scroll-progress {
+        position: fixed;
+        top: 0; left: 0;
+        height: 3px;
+        background: linear-gradient(90deg, hsl(32 100% 53%), hsl(20 100% 65%));
+        z-index: 99999;
+        transform-origin: left;
+        transform: scaleX(0);
+        transition: transform 0.1s linear;
+        box-shadow: 0 0 10px hsl(32 100% 53% / 0.7);
+      }
+
+      /* ── FLOATING ORBS in background ── */
+      .bg-orb {
+        position: fixed;
+        border-radius: 50%;
+        filter: blur(80px);
+        opacity: 0.07;
+        pointer-events: none;
+        z-index: 0;
+        animation: orbDrift 18s ease-in-out infinite;
+      }
+      .bg-orb-1 {
+        width: 500px; height: 500px;
+        background: hsl(32 100% 53%);
+        top: -150px; left: -150px;
+        animation-duration: 20s;
+      }
+      .bg-orb-2 {
+        width: 400px; height: 400px;
+        background: hsl(20 100% 45%);
+        bottom: 20%; right: -100px;
+        animation-duration: 25s;
+        animation-delay: -8s;
+      }
+      .bg-orb-3 {
+        width: 300px; height: 300px;
+        background: hsl(32 100% 53%);
+        top: 50%; left: 40%;
+        animation-duration: 30s;
+        animation-delay: -15s;
+      }
+      @keyframes orbDrift {
+        0%, 100% { transform: translate(0, 0) scale(1); }
+        33%       { transform: translate(40px, -30px) scale(1.05); }
+        66%       { transform: translate(-20px, 20px) scale(0.95); }
+      }
+
+      /* ── SECTION ENTRANCE VARIANTS ── */
+      .reveal-left {
+        opacity: 0;
+        transform: translateX(-50px);
+        transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+                    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      .reveal-right {
+        opacity: 0;
+        transform: translateX(50px);
+        transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+                    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      .reveal-left.visible,
+      .reveal-right.visible {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      /* ── STAGGERED CARD REVEALS ── */
+      .reveal[style*="animation-delay"] {
+        transition-delay: inherit;
+      }
+
+      /* ── BUTTON RIPPLE ── */
+      button, a[href] {
+        position: relative;
+        overflow: hidden;
+      }
+      button::after, a[href]::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at var(--ripple-x, 50%) var(--ripple-y, 50%),
+          hsl(0 0% 100% / 0.15) 0%, transparent 70%);
+        opacity: 0;
+        transform: scale(0);
+        transition: transform 0.5s ease, opacity 0.5s ease;
+        pointer-events: none;
+      }
+      button:active::after, a[href]:active::after {
+        opacity: 1;
+        transform: scale(2.5);
+        transition: none;
+      }
+
+      /* ── STAT COUNTER NUMBERS ── */
+      .stat-number {
+        font-variant-numeric: tabular-nums;
+        transition: all 0.05s;
+      }
+
+      /* ── MOBILE FIXES ── */
       @media (max-width: 768px) {
-        /* 2. Impede que qualquer imagem (incluindo a do app) estique e quebre a tela */
         img {
           max-width: 100% !important;
           height: auto !important;
           object-fit: contain;
         }
 
-        /* 3. Ajuste fino para os botões: permite que o fundo cresça junto com o texto */
         button, a {
           white-space: normal !important;
           max-width: 100% !important;
-          height: auto !important; /* Deixa o botão crescer para baixo */
-          min-height: 48px !important; /* Tamanho mínimo bom para clicar com o dedo */
-          padding-top: 12px !important; /* Dá um respiro em cima */
-          padding-bottom: 12px !important; /* Dá um respiro embaixo */
-          line-height: 1.2 !important; /* Deixa as linhas do texto mais baixinhas */
+          height: auto !important;
+          min-height: 48px !important;
+          padding-top: 12px !important;
+          padding-bottom: 12px !important;
+          line-height: 1.2 !important;
         }
+
+        .bg-orb { display: none; }
+      }
+
+      /* ── GRAIN TEXTURE overlay ── */
+      body::after {
+        content: '';
+        position: fixed;
+        inset: 0;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+        background-repeat: repeat;
+        background-size: 180px 180px;
+        opacity: 0.018;
+        pointer-events: none;
+        z-index: 99998;
+      }
+
+      /* ── HIGHLIGHT UNDERLINE animation ── */
+      .animated-underline {
+        position: relative;
+        display: inline-block;
+      }
+      .animated-underline::after {
+        content: '';
+        position: absolute;
+        bottom: -3px; left: 0;
+        width: 0; height: 2px;
+        background: hsl(32 100% 53%);
+        border-radius: 2px;
+        transition: width 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+        box-shadow: 0 0 8px hsl(32 100% 53% / 0.6);
+      }
+      .animated-underline:hover::after { width: 100%; }
+
+      /* ── HERO STATS ROW ── */
+      .stat-bar-fill {
+        animation: fillBar 1.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+      }
+      @keyframes fillBar {
+        from { width: 0; }
+      }
+
+      /* ── LOADING ENTRANCE for #root ── */
+      #root {
+        animation: rootFadeIn 0.6s ease both;
+      }
+      @keyframes rootFadeIn {
+        from { opacity: 0; }
+        to   { opacity: 1; }
+      }
+
+      /* ── SECTION DIVIDER with orange line ── */
+      section + section::before {
+        content: '';
+        display: block;
+        height: 1px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          hsl(32 100% 53% / 0.3) 30%,
+          hsl(32 100% 53% / 0.3) 70%,
+          transparent
+        );
+        margin: 0 auto;
+        width: 80%;
+      }
+
+      /* ── MAGNETIC BUTTON effect helper ── */
+      .magnetic {
+        display: inline-block;
+        transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1);
       }
     </style>
   </head>
 
   <body>
+    <!-- Scroll progress bar -->
+    <div id="scroll-progress"></div>
+
+    <!-- Floating background orbs -->
+    <div class="bg-orb bg-orb-1" aria-hidden="true"></div>
+    <div class="bg-orb bg-orb-2" aria-hidden="true"></div>
+    <div class="bg-orb bg-orb-3" aria-hidden="true"></div>
+
+    <!-- Custom cursor (desktop only) -->
+    <div id="cursor-dot"  aria-hidden="true"></div>
+    <div id="cursor-ring" aria-hidden="true"></div>
+
+    <!-- React app root -->
     <div id="root"></div>
+
+    <script>
+      /* ── SCROLL PROGRESS ── */
+      (function () {
+        const bar = document.getElementById('scroll-progress');
+        const update = () => {
+          const max = document.documentElement.scrollHeight - window.innerHeight;
+          const pct = max > 0 ? window.scrollY / max : 0;
+          bar.style.transform = `scaleX(${pct})`;
+        };
+        window.addEventListener('scroll', update, { passive: true });
+      })();
+
+      /* ── CUSTOM CURSOR ── */
+      (function () {
+        const dot  = document.getElementById('cursor-dot');
+        const ring = document.getElementById('cursor-ring');
+        if (!dot || !ring) return;
+
+        let mx = 0, my = 0, rx = 0, ry = 0;
+        let hidden = false;
+
+        document.addEventListener('mousemove', e => {
+          mx = e.clientX; my = e.clientY;
+          dot.style.left  = mx + 'px';
+          dot.style.top   = my + 'px';
+          if (hidden) {
+            dot.style.opacity = ring.style.opacity = '1';
+            hidden = false;
+          }
+        });
+
+        document.addEventListener('mouseleave', () => {
+          dot.style.opacity = ring.style.opacity = '0';
+          hidden = true;
+        });
+
+        const hoverEls = ['a', 'button', '[role="button"]'];
+        document.addEventListener('mouseover', e => {
+          if (hoverEls.some(s => e.target.closest(s))) {
+            dot.style.transform  = 'translate(-50%,-50%) scale(2.2)';
+            ring.style.width     = '52px';
+            ring.style.height    = '52px';
+            ring.style.borderColor = 'hsl(32,100%,53%)';
+          }
+        });
+        document.addEventListener('mouseout', e => {
+          if (hoverEls.some(s => e.target.closest(s))) {
+            dot.style.transform  = 'translate(-50%,-50%) scale(1)';
+            ring.style.width     = '36px';
+            ring.style.height    = '36px';
+            ring.style.borderColor = 'hsl(32,100%,53%,0.6)';
+          }
+        });
+
+        // Ring trails with RAF
+        const lerp = (a, b, t) => a + (b - a) * t;
+        const tick = () => {
+          rx = lerp(rx, mx, 0.12);
+          ry = lerp(ry, my, 0.12);
+          ring.style.left = rx + 'px';
+          ring.style.top  = ry + 'px';
+          requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+      })();
+
+      /* ── REVEAL on scroll (IntersectionObserver) ── */
+      (function () {
+        const selectors = '.reveal, .reveal-left, .reveal-right';
+        const els = document.querySelectorAll(selectors);
+
+        if (!els.length) {
+          // React hasn't rendered yet — wait for DOMContentLoaded + a tick
+          const tryObserve = () => {
+            const all = document.querySelectorAll(selectors);
+            observe(all);
+          };
+          window.addEventListener('load', tryObserve);
+          // Also retry after React mounts
+          setTimeout(tryObserve, 500);
+          setTimeout(tryObserve, 1500);
+          return;
+        }
+
+        observe(els);
+
+        function observe(nodes) {
+          const io = new IntersectionObserver(entries => {
+            entries.forEach(e => {
+              if (e.isIntersecting) {
+                // Stagger siblings
+                const siblings = e.target.parentElement
+                  ? [...e.target.parentElement.children].filter(c => c.classList.contains('reveal'))
+                  : [];
+                const idx = siblings.indexOf(e.target);
+                e.target.style.transitionDelay = idx > 0 ? (idx * 0.1) + 's' : '0s';
+                e.target.classList.add('visible');
+                io.unobserve(e.target);
+              }
+            });
+          }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+          nodes.forEach(n => io.observe(n));
+        }
+      })();
+
+      /* ── RE-OBSERVE after React renders ── */
+      (function () {
+        let tried = 0;
+        function tryReveal() {
+          const all = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+          if (!all.length && tried < 10) {
+            tried++;
+            setTimeout(tryReveal, 400);
+            return;
+          }
+          const io = new IntersectionObserver(entries => {
+            entries.forEach(e => {
+              if (e.isIntersecting) {
+                const siblings = e.target.parentElement
+                  ? [...e.target.parentElement.children].filter(c => c.classList.contains('reveal'))
+                  : [];
+                const idx = siblings.indexOf(e.target);
+                e.target.style.transitionDelay = idx > 0 ? (idx * 0.1) + 's' : '0s';
+                e.target.classList.add('visible');
+                io.unobserve(e.target);
+              }
+            });
+          }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+          all.forEach(n => io.observe(n));
+        }
+        window.addEventListener('load', () => setTimeout(tryReveal, 300));
+      })();
+
+      /* ── RIPPLE on buttons / links ── */
+      document.addEventListener('pointerdown', e => {
+        const el = e.target.closest('button, a');
+        if (!el) return;
+        const rect = el.getBoundingClientRect();
+        el.style.setProperty('--ripple-x', ((e.clientX - rect.left) / rect.width * 100) + '%');
+        el.style.setProperty('--ripple-y', ((e.clientY - rect.top)  / rect.height * 100) + '%');
+      });
+
+      /* ── COUNTER ANIMATION for stat numbers ── */
+      function animateCount(el, end, duration) {
+        const start = 0;
+        const startTime = performance.now();
+        const step = (now) => {
+          const elapsed = now - startTime;
+          const progress = Math.min(elapsed / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3); // ease-out cubic
+          el.textContent = Math.round(start + (end - start) * eased) + '+';
+          if (progress < 1) requestAnimationFrame(step);
+        };
+        requestAnimationFrame(step);
+      }
+
+      // Observe stat numbers when they appear
+      (function () {
+        const io = new IntersectionObserver(entries => {
+          entries.forEach(e => {
+            if (e.isIntersecting) {
+              const el = e.target;
+              const val = parseInt(el.dataset.count || el.textContent);
+              if (!isNaN(val)) animateCount(el, val, 1800);
+              io.unobserve(el);
+            }
+          });
+        }, { threshold: 0.5 });
+
+        // Try after React mounts
+        setTimeout(() => {
+          document.querySelectorAll('.stat-number, [data-count]').forEach(n => io.observe(n));
+        }, 1000);
+      })();
+
+      /* ── MAGNETIC BUTTONS ── */
+      (function () {
+        function applyMagnetic() {
+          document.querySelectorAll('.magnetic').forEach(el => {
+            el.addEventListener('mousemove', e => {
+              const r = el.getBoundingClientRect();
+              const dx = e.clientX - (r.left + r.width / 2);
+              const dy = e.clientY - (r.top  + r.height / 2);
+              el.style.transform = `translate(${dx * 0.25}px, ${dy * 0.25}px)`;
+            });
+            el.addEventListener('mouseleave', () => {
+              el.style.transform = 'translate(0, 0)';
+            });
+          });
+        }
+        window.addEventListener('load', () => setTimeout(applyMagnetic, 800));
+      })();
+
+      /* ── HERO PARTICLES (fire sparks) ── */
+      (function () {
+        function trySpawn() {
+          const hero = document.querySelector('section');
+          if (!hero) { setTimeout(trySpawn, 500); return; }
+
+          for (let i = 0; i < 12; i++) {
+            setTimeout(() => spawnSpark(hero), i * 180);
+          }
+          setInterval(() => spawnSpark(hero), 900);
+        }
+
+        function spawnSpark(container) {
+          const s = document.createElement('span');
+          const size = Math.random() * 5 + 2;
+          const x = Math.random() * 100;
+          const dx = (Math.random() - 0.5) * 80 + 'px';
+          const dy = -(Math.random() * 120 + 60) + 'px';
+
+          Object.assign(s.style, {
+            position: 'absolute',
+            bottom: '0',
+            left: x + '%',
+            width: size + 'px',
+            height: size + 'px',
+            borderRadius: '50%',
+            background: Math.random() > 0.5
+              ? 'hsl(32 100% 53%)'
+              : 'hsl(20 100% 70%)',
+            boxShadow: '0 0 6px hsl(32 100% 53% / 0.8)',
+            pointerEvents: 'none',
+            zIndex: '2',
+            '--dx': dx,
+            '--dy': dy,
+            animation: `spark ${Math.random() * 1.5 + 1}s ease-out forwards`,
+          });
+
+          container.appendChild(s);
+          setTimeout(() => s.remove(), 2600);
+        }
+
+        window.addEventListener('load', () => setTimeout(trySpawn, 800));
+      })();
+
+      /* ── SMOOTH PARALLAX on hero background ── */
+      (function () {
+        const update = () => {
+          const hero = document.querySelector('section');
+          if (!hero) return;
+          const y = window.scrollY;
+          hero.style.backgroundPositionY = `calc(center + ${y * 0.3}px)`;
+        };
+        window.addEventListener('scroll', update, { passive: true });
+      })();
+
+    </script>
   </body>
 </html>
